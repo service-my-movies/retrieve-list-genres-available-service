@@ -32,7 +32,7 @@ public class ListGenresAvailableController implements IListGenresAvailableContro
 		try {
 			listGenresAvailable = listGenresAvailableService.getAPI_ListGenresAvailable();
 		} catch (Exception e) {
-			LOGGER.error("Unexpected Error: getAPI_ListGenresAvailable: " + e);
+			LOGGER.error("Unexpected Error From Controller: getAPI_ListGenresAvailable: " + e);
 		}
 
 		return listGenresAvailable.getGenres();

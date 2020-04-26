@@ -3,6 +3,7 @@ package com.mymovies.service;
 import com.mymovies.dto.ListGenresAvailableDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -10,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class ListGenresAvailableService implements IListGenresAvailableService {
 
-	@Value("${resource.api.url}")
+	@Value("${resource.api.url.base}")
 	private String BASE_URL;
 	
 	@Value("${resource.api.url.image}")
@@ -24,7 +25,8 @@ public class ListGenresAvailableService implements IListGenresAvailableService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ListGenresAvailableService.class);
 	
-	private RestTemplate restTemplate = new RestTemplate();
+	@Autowired
+	private RestTemplate restTemplate;
 
 	public ListGenresAvailableDTO getAPI_ListGenresAvailable() {
 
@@ -33,7 +35,7 @@ public class ListGenresAvailableService implements IListGenresAvailableService {
 		try {
 			listGenresAvailable = restTemplate.getForObject(BASE_URL+API_KEY+Language, ListGenresAvailableDTO.class);
 		} catch (Exception e) {
-			LOGGER.error("Unexpected Error: getAPI_ListGenresAvailable: " + e);
+			LOGGER.error("Unexpected Error From Service: getAPI_ListGenresAvailable: " + e);
 		}
 
 		return listGenresAvailable;
