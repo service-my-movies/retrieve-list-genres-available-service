@@ -31,9 +31,13 @@ public class ListGenresAvailableService implements IListGenresAvailableService {
 	public ListGenresAvailableDTO getAPI_ListGenresAvailable() {
 
 		ListGenresAvailableDTO listGenresAvailable = null;
+		
+		String url = BASE_URL+API_KEY+Language;
+		
+		LOGGER.info("@Get getAPI_ListGenresAvailable Service URL : " + url);
 
 		try {
-			listGenresAvailable = restTemplate.getForObject(BASE_URL+API_KEY+Language, ListGenresAvailableDTO.class);
+			listGenresAvailable = restTemplate.getForObject(url, ListGenresAvailableDTO.class);
 		} catch (Exception e) {
 			LOGGER.error("Unexpected Error From Service: getAPI_ListGenresAvailable: " + e);
 		}
